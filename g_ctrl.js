@@ -160,7 +160,7 @@ async function listFilesById(vid) {
       for (const file of files){
         let _vid = (file.name.split("-"))[1]
         let headers = 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36';
-        myExec(`curl -H "${headers}" --data "id=${_vid}&uri=https://drive.google.com/file/d/${file.id}/view?usp=drivesdk&host=drive" "https://api.fath.xyz/index.php/api/host_data"`)
+        myExec(`curl -H "${headers}" --data "id=${_vid}&uri=https://drive.google.com/file/d/${file.id}/view?usp=drivesdk&host=drive" "{URL_API}"`)
         .then((_res)=>{console.log(_res)})
         .catch((err) => {
           console.log(err)
@@ -168,17 +168,6 @@ async function listFilesById(vid) {
         });
         console.log(`${file.name} (${file.id})`);
       };
-      // files.map((file) => {
-      //   let _vid = (file.name.split("-"))[1]
-      //   let headers = 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36';
-      //   myExec(`curl -H "${headers}" --data "id=${_vid}&uri=https://drive.google.com/file/d/${file.id}/view?usp=drivesdk&host=drive" "https://api.fath.xyz/index.php/api/host_data"`)
-      //   .then((_res)=>{console.log(_res)})
-      //   .catch((err) => {
-      //     console.log(err)
-      //     map_err.push(`id=${_vid}&uri=https://drive.google.com/file/d/${file.id}/view?usp=drivesdk&host=drive`);
-      //   });
-      //   console.log(`${file.name} (${file.id})`);
-      // });
       if(map_err.length>0){
         console.log(map_err);
         return ({'status':'error','len':map_err.length,'state':'some uri not syncronized'});
